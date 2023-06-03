@@ -1,30 +1,29 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './Post.module.scss';
 import { UserIcon } from 'shared/icons';
 import { Commentary } from './ui/Commentary';
 import { Button } from 'shared/ui';
 import { ToggleButton } from 'react-bootstrap';
 
-interface Comment {
-  userId: string;
-  text: string;
-}
+import { IPost } from 'shared/models/IPost';
+import { IUser } from 'shared/models/IUser';
+import { IComment } from 'shared/models/IComment';
+import { commentsService } from 'shared/api/services/commentsService';
 
-interface PostProps {
-  header: string;
-  text: string;
-  userId: string;
-  postId: string;
-  comments: Comment[];
-}
-
-export const Post: FC<PostProps> = ({ header, text, userId, postId, comments }) => {
+export const Post: FC<IPost> = ({ title, body, userId, id }) => {
   const [commentsShow, setCommentsShow] = useState(false);
+
+  const [commentsArray, setCommentsArray] = useState([] as IComment[]);
+  const [usersArray, setUsersArray] = useState([] as IUser[]);
+
+  useEffect(() => {
+    commentsService.getPostComments(id).then((data) => setCommentsArray(data));
+  }, [setCommentsArray]);
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.header}>{header}</h2>
-      <p>{text}</p>
+      <h2 className={styles.header}>{title}</h2>
+      <p>{body}</p>
       <div className={styles.user}>
         <UserIcon className={styles.icon} />
         <div>{userId}</div>
@@ -39,7 +38,7 @@ export const Post: FC<PostProps> = ({ header, text, userId, postId, comments }) 
         <div className={styles.comments}>
           <ToggleButton
             className="mb-2"
-            id={postId}
+            id={id}
             type="checkbox"
             variant="outline-primary"
             checked={commentsShow}
@@ -52,9 +51,9 @@ export const Post: FC<PostProps> = ({ header, text, userId, postId, comments }) 
 
       {commentsShow && (
         <div>
-          <Commentary userId={userId} text={text} />
-          <Commentary userId={userId} text={text} />
-          <Commentary userId={userId} text={text} />
+          {commentsArray.map((comment) => (
+            <Commentary userId={comment.email} text={comment.body} />
+          ))}
         </div>
       )}
     </div>
