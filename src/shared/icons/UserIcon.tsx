@@ -3,9 +3,9 @@ import { FC, SVGProps } from 'react';
 export const UserIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
+      width="20px"
       {...props}
       fill="#7e7e7e"
-      width="20px"
       height="20px"
       viewBox="0 0 32 32"
       version="1.1"
