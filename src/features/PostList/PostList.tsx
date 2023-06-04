@@ -1,5 +1,5 @@
-import { Post } from 'entities/index';
-import styles from './PostList.module.scss';
+import { PostBody } from 'entities/index';
+
 import { FC, useEffect, useState } from 'react';
 
 import { postService } from 'shared/api/services/postService';
@@ -13,9 +13,15 @@ export const PostList: FC = () => {
   }, [setPostsArray]);
 
   return (
-    <div className={styles.container}>
+    <div>
       {postsArray.map((post) => (
-        <Post title={post.title} body={post.body} userId={post.userId} id={post.id} key={post.id} />
+        <PostBody
+          title={post.title}
+          body={post.body}
+          userId={post.userId}
+          id={post.id}
+          key={post.id}
+        />
       ))}
     </div>
   );

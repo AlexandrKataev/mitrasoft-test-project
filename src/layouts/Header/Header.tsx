@@ -1,28 +1,26 @@
-import React from 'react';
-import styles from './Header.module.scss';
+import { FC } from 'react';
 
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
-export const Header = () => {
+export const Header: FC = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
       <Container>
-        <Navbar.Brand href="/">XXX</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink
               to="/"
-              className={({ isActive, isPending }) =>
-                isPending ? styles.pending : isActive ? styles.active : styles.passive
+              className={({ isActive }) =>
+                isActive ? 'text-dark p-2 text-opacity-50' : 'text-dark p-2'
               }>
               Список постов
             </NavLink>
             <NavLink
               to="/user/me"
-              className={({ isActive, isPending }) =>
-                isPending ? styles.pending : isActive ? styles.active : styles.passive
+              className={({ isActive }) =>
+                isActive ? 'text-dark p-2 text-opacity-50' : 'text-dark p-2'
               }>
               Обо мне
             </NavLink>

@@ -1,11 +1,35 @@
-import { User } from 'entities/index';
 import { FC } from 'react';
-import styles from './UserInfo.module.scss';
+
+import { UserCard } from 'entities/User/UserCard';
+
+const userInfo = {
+  id: 1,
+  name: 'Leanne Graham',
+  username: 'Bret',
+  email: 'Sincere@april.biz',
+  address: {
+    street: 'Kulas Light',
+    suite: 'Apt. 556',
+    city: 'Gwenborough',
+    zipcode: '92998-3874',
+    geo: {
+      lat: '-37.3159',
+      lng: '81.1496',
+    },
+  },
+  phone: '1-770-736-8031 x56442',
+  website: 'hildegard.org',
+  company: {
+    name: 'Romaguera-Crona',
+    catchPhrase: 'Multi-layered client-server neural-net',
+    bs: 'harness real-time e-markets',
+  },
+};
 
 export const UserInfo: FC = () => {
   return (
-    <div className={styles.container}>
-      <User />
+    <div className="rounded-3">
+      <UserCard {...userInfo} />
     </div>
   );
 };

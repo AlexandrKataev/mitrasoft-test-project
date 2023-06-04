@@ -6,7 +6,6 @@ export const UserIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
       width="20px"
       {...props}
       fill="#7e7e7e"
-      height="20px"
       viewBox="0 0 32 32"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg">
