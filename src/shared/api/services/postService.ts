@@ -7,8 +7,8 @@ export const postService = {
     const response = await instance.get<IPost[]>('/posts');
     return response.data;
   },
-  getUserPostList: async (userId: number) => {
-    const response = await instance.get<IPost>(`/posts/${userId}`);
+  getUserPostList: async (userId: string) => {
+    const response = await instance.get<IPost[]>(`/user/${userId}/posts`);
     return response.data;
   },
   updatePost: async (post: IPost) => {

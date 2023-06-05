@@ -4,7 +4,7 @@ import React from 'react';
 export const HomePage = () => {
   return (
     <div>
-      <PostList />
+      <PostList userId="all" />
     </div>
   );
 };

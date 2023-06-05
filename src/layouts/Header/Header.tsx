@@ -18,7 +18,7 @@ export const Header: FC = () => {
               Список постов
             </NavLink>
             <NavLink
-              to="/user/me"
+              to="/about"
               className={({ isActive }) =>
                 isActive ? 'text-dark p-2 text-opacity-50' : 'text-dark p-2'
               }>

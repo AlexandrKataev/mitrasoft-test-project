@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 
-import { ToggleButton } from 'react-bootstrap';
+import { Image, Row, ToggleButton } from 'react-bootstrap';
 
 import { IPost, IComment } from 'shared/models';
 import { commentService } from 'shared/api/services';
 
 import { CommentRow } from 'entities/Comment/CommentRow';
-import { UserIcon } from 'shared/icons';
+
 import { Link } from 'react-router-dom';
 
 export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
@@ -20,17 +20,23 @@ export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
 
   return (
     <div className="mb-3 p-4 rounded-3 bg-white border">
-      <h2>
+      <div className="d-flex mb-3">
         <Link to={`/user/${userId}`}>
-          <UserIcon width="30px" />
+          <Image
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/cf56a020234087.562e7e854f620.jpg"
+            width="64px"
+            className="me-3"
+            roundedCircle
+          />
         </Link>
-        {title}
-      </h2>
+        <h2 className="mt-2">{title}</h2>
+      </div>
+
       <p>{body}</p>
       <div>
         <div>
           <ToggleButton
-            className="mb-1 btn-sm"
+            className="my-1 btn-sm"
             id={id}
             type="checkbox"
             variant="outline-primary"

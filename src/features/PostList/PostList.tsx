@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
+import { selectPostList, setPostList } from 'app/redux/slices/postListSlice';
 import { PostBody } from 'entities/index';
 
 import { FC, useEffect, useState } from 'react';
@@ -5,16 +7,24 @@ import { FC, useEffect, useState } from 'react';
 import { postService } from 'shared/api/services/postService';
 import { IPost } from 'shared/models/IPost';
 
-export const PostList: FC = () => {
-  const [postsArray, setPostsArray] = useState([] as IPost[]);
+interface PostListProps {
+  userId: string | 'all';
+}
+
+export const PostList: FC<PostListProps> = ({ userId }) => {
+  const dispatch = useAppDispatch();
+
+  const postsArray = useAppSelector(selectPostList);
 
   useEffect(() => {
-    postService.getPostList().then((data) => setPostsArray(data));
-  }, [setPostsArray]);
+    userId === 'all'
+      ? postService.getPostList().then((data) => dispatch(setPostList(data)))
+      : postService.getUserPostList(userId).then((data) => dispatch(setPostList(data)));
+  }, [userId]);
 
   return (
     <div>
-      {postsArray.map((post) => (
+      {postsArray.items.map((post) => (
         <PostBody
           title={post.title}
           body={post.body}

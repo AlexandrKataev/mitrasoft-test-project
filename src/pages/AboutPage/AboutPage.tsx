@@ -1,9 +1,5 @@
-import { UserInfo } from 'features/index';
+import React from 'react';
 
 export const AboutPage = () => {
-  return (
-    <div>
-      <UserInfo />
-    </div>
-  );
+  return <h1>About Page</h1>;
 };
