@@ -51,7 +51,7 @@ export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
       {commentsShow && (
         <div>
           {commentsArray.map((comment) => (
-            <CommentRow {...comment} />
+            <CommentRow {...comment} key={comment.id} />
           ))}
         </div>
       )}
