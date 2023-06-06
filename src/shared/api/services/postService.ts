@@ -3,8 +3,8 @@ import { instance } from '../config/axios';
 import { IPost } from 'shared/models/IPost';
 
 export const postService = {
-  getPostList: async () => {
-    const response = await instance.get<IPost[]>('/posts');
+  getPostList: async (searchValue: string) => {
+    const response = await instance.get<IPost[]>(`/posts?q=${searchValue}`);
     return response.data;
   },
   getUserPostList: async (userId: string) => {

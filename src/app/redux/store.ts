@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 
 import posts from './slices/postSlice';
-import postSaga from './slices/postSaga';
+import search from './slices/searchSlice';
+import postSaga from '../saga/postSaga';
+import sort from './slices/sortSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: { posts },
+  reducer: { posts, search, sort },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
 

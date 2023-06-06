@@ -15,7 +15,7 @@ export const postSlice = createSlice({
     setPostList: (state, action: PayloadAction<IPost[]>) => {
       state.posts = action.payload;
     },
-    getPostsFetch: (state) => {
+    getPostsFetch: (state, action: PayloadAction<string>) => {
       state.isLoading = true;
     },
     getPostsSuccess: (state, action: PayloadAction<IPost[]>) => {

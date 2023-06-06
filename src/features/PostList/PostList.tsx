@@ -1,8 +1,10 @@
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
 import { getPostsFetch, selectPostList } from 'app/redux/slices/postSlice';
 import { PostBody } from 'entities/index';
+import { Sort, Search, PaginationBlock } from 'features';
 
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useSearch } from 'shared/hooks/useSearch';
 
 interface PostListProps {
   userId: string | 'all';
@@ -12,8 +14,10 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
   const dispatch = useAppDispatch();
   const postsArray = useAppSelector(selectPostList);
 
+  const { searchValue, onChangeSearchValue } = useSearch();
+
   useEffect(() => {
-    dispatch(getPostsFetch());
+    dispatch(getPostsFetch(searchValue));
   }, [dispatch]);
 
   // useEffect(() => {
@@ -26,6 +30,13 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
 
   return (
     <div>
+      <div className="my-3 d-flex">
+        <Search searchValue={searchValue} onChangeSearch={onChangeSearchValue} />
+        <Sort />
+      </div>
+      <div>
+        <PaginationBlock />
+      </div>
       {postsArray.posts.map((post) => (
         <PostBody
           title={post.title}
