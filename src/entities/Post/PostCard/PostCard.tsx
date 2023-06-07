@@ -8,15 +8,12 @@ import { commentService } from 'shared/api/services';
 import { CommentRow } from 'entities/Comment/CommentRow';
 
 import { Link } from 'react-router-dom';
+import { CommentList } from 'entities/Comment/CommentList/CommentList';
 
 export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
   const [commentsShow, setCommentsShow] = useState(false);
 
   const [commentsArray, setCommentsArray] = useState([] as IComment[]);
-
-  useEffect(() => {
-    commentService.getPostComments(id).then((data) => setCommentsArray(data));
-  }, [setCommentsArray]);
 
   return (
     <div className="mb-3 p-4 rounded-3 bg-white border">
@@ -49,11 +46,7 @@ export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
       </div>
 
       {commentsShow && (
-        <div>
-          {commentsArray.map((comment) => (
-            <CommentRow {...comment} key={comment.id} />
-          ))}
-        </div>
+        <CommentList commentsArray={commentsArray} setCommentsArray={setCommentsArray} id={id} />
       )}
     </div>
   );
