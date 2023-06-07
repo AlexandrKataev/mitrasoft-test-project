@@ -1,20 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { getPostQueries } from 'shared/api/services';
 
 interface ISortState {
-  sortBy: 'no' | '&_sort=title&_order=asc';
+  sortBy: '' | 'title';
 }
 
 const initialState: ISortState = {
-  sortBy: 'no',
+  sortBy: '',
 };
 
 export const sortSlice = createSlice({
   name: 'sort',
   initialState,
   reducers: {
-    setSortBy: (state, action: PayloadAction<'no' | '&_sort=title&_order=asc'>) => {
-      state.sortBy = action.payload;
+    setSortBy: (state, action: PayloadAction<getPostQueries>) => {
+      state.sortBy = action.payload.sortBy;
     },
   },
 });

@@ -2,22 +2,22 @@ import { instance } from '../config/axios';
 
 import { IPost } from 'shared/models/IPost';
 
+export interface getPostQueries {
+  searchValue: string;
+  sortBy: '' | 'title';
+  currentPage: number;
+  totalPages: number;
+}
+
 export const postService = {
-  getPostList: async (searchValue: string) => {
-    const response = await instance.get<IPost[]>(`/posts?q=${searchValue}`);
-    return response.data;
+  getPostList: async ({ searchValue, sortBy, currentPage }: getPostQueries) => {
+    const response = await instance.get<IPost[]>(
+      `/posts?title_like=${searchValue}&_sort=${sortBy}&_order=asc&_page=${currentPage}`,
+    );
+    return response;
   },
   getUserPostList: async (userId: string) => {
     const response = await instance.get<IPost[]>(`/user/${userId}/posts`);
     return response.data;
-  },
-  updatePost: async (post: IPost) => {
-    await instance.put(`/posts/${post.id}`, post);
-  },
-  createPost: async (post: IPost) => {
-    await instance.post(`/posts`, post);
-  },
-  deletePost: async (id: number) => {
-    await instance.delete(`/posts/${id}`);
   },
 };

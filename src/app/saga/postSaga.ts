@@ -1,34 +1,60 @@
 import { call, delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { postService } from 'shared/api/services';
-import { getPostsFailure, getPostsSuccess } from '../redux/slices/postSlice';
+import { getPostQueries, postService } from 'shared/api/services';
+import {
+  getPostsFailure,
+  getPostsFetch,
+  getPostsSuccess,
+  setFetching,
+} from '../redux/slices/postSlice';
 import { IPost } from 'shared/models';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { AxiosResponse } from 'axios';
+import { resetCurrentPage, setCurrentPage, setTotalPages } from 'app/redux/slices/paginationSlice';
 
-function* fetchPostsWorker(action: PayloadAction<string>) {
+function* workFetchPosts(action: PayloadAction<getPostQueries>) {
   try {
-    const posts: IPost[] = yield call(postService.getPostList, action.payload);
-    yield put(getPostsSuccess(posts));
+    yield put(setFetching());
+    yield delay(1000);
+    const posts: AxiosResponse<IPost[], any> = yield call(postService.getPostList, action.payload);
+    yield put(getPostsSuccess(posts.data));
+    yield put(setTotalPages(Math.ceil(posts.headers['x-total-count'] / 10)));
+    yield console.log(Math.ceil(posts.headers['x-total-count'] / 10));
   } catch (e) {
     console.log('ошибка апи');
     yield put(getPostsFailure());
   }
 }
 
-function* searchPostsWorker(action: PayloadAction<string>) {
+function* workPaginatePosts(action: PayloadAction<getPostQueries>) {
+  try {
+    const posts: AxiosResponse<IPost[], any> = yield call(postService.getPostList, action.payload);
+    yield put(setFetching());
+    yield delay(1000);
+    yield put(getPostsSuccess(posts.data));
+    yield console.log(Math.ceil(posts.headers['x-total-count'] / 10));
+  } catch (e) {
+    console.log('ошибка апи');
+    yield put(getPostsFailure());
+  }
+}
+
+function* workSearchPosts(action: PayloadAction<getPostQueries>) {
   yield delay(500);
   try {
-    const posts: IPost[] = yield call(postService.getPostList, action.payload);
-    yield put(getPostsSuccess(posts));
+    const posts: AxiosResponse<IPost[], any> = yield call(postService.getPostList, action.payload);
+    yield put(getPostsSuccess(posts.data));
+    yield put(resetCurrentPage());
+    yield put(setTotalPages(Math.ceil(posts.headers['x-total-count'] / 10)));
   } catch (e) {
     console.log('ошибка апи');
     yield put(getPostsFailure());
   }
 }
 
-function* sortPostsWorker(action: PayloadAction<string>) {
+function* workSortPosts(action: PayloadAction<getPostQueries>) {
   try {
-    const posts: IPost[] = yield call(postService.getPostList, action.payload);
-    yield put(getPostsSuccess(posts));
+    const posts: AxiosResponse<IPost[], any> = yield call(postService.getPostList, action.payload);
+    yield put(getPostsSuccess(posts.data));
   } catch (e) {
     console.log('ошибка апи');
     yield put(getPostsFailure());
@@ -36,9 +62,10 @@ function* sortPostsWorker(action: PayloadAction<string>) {
 }
 
 function* postsWathcer() {
-  yield takeEvery('posts/getPostsFetch', fetchPostsWorker);
-  // yield takeLatest('search/setSearchValue', searchPostsWorker);
-  yield takeEvery('sort/setSortBy', sortPostsWorker);
+  yield takeLatest('posts/getPostsFetch', workFetchPosts);
+  yield takeLatest('pagination/setCurrentPage', workPaginatePosts);
+  yield takeLatest('search/setSearchValue', workSearchPosts);
+  yield takeLatest('sort/setSortBy', workSortPosts);
 }
 
 export default postsWathcer;

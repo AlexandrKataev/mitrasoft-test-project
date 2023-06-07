@@ -1,20 +1,44 @@
+import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
+import {
+  selectCurrentPage,
+  selectTotalPages,
+  setCurrentPage,
+} from 'app/redux/slices/paginationSlice';
+import { selectSearchValue } from 'app/redux/slices/searchSlice';
+import { selectSortBy } from 'app/redux/slices/sortSlice';
 import React, { useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 
-let active = 2;
-let items = [] as any;
-for (let number = 1; number <= 5; number++) {
-  items.push(
-    <Pagination.Item key={number} active={number === active}>
-      {number}
-    </Pagination.Item>,
-  );
-}
-
 export const PaginationButtonGroup = () => {
+  const dispatch = useAppDispatch();
+  const currentPage = useAppSelector(selectCurrentPage);
+  const totalPages = useAppSelector(selectTotalPages);
+  const searchValue = useAppSelector(selectSearchValue);
+  const sortBy = useAppSelector(selectSortBy);
+
+  const [items, setItems] = useState([0]);
+
+  useEffect(() => {
+    setItems(Array.from({ length: totalPages }, (_, i) => i + 1));
+  }, [totalPages]);
+
   return (
-    <div>
-      <Pagination>{items}</Pagination>
+    <div className="pb-5">
+      <Pagination>
+        {items.map((el) => {
+          return (
+            <Pagination.Item
+              key={el}
+              active={el === +currentPage}
+              onClick={() => {
+                dispatch(setCurrentPage({ currentPage: el, totalPages, searchValue, sortBy }));
+                window.scrollTo(0, 0);
+              }}>
+              {el}
+            </Pagination.Item>
+          );
+        })}
+      </Pagination>
     </div>
   );
 };

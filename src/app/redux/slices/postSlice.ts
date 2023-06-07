@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { IPost } from 'shared/models';
 import { RootState } from '../store';
+import { getPostQueries } from 'shared/api/services';
 
 const initialState = {
   posts: [] as IPost[],
@@ -15,7 +16,10 @@ export const postSlice = createSlice({
     setPostList: (state, action: PayloadAction<IPost[]>) => {
       state.posts = action.payload;
     },
-    getPostsFetch: (state, action: PayloadAction<string>) => {
+    setFetching: (state) => {
+      state.isLoading = true;
+    },
+    getPostsFetch: (state, action: PayloadAction<getPostQueries>) => {
       state.isLoading = true;
     },
     getPostsSuccess: (state, action: PayloadAction<IPost[]>) => {
@@ -28,8 +32,10 @@ export const postSlice = createSlice({
   },
 });
 
-export const { setPostList, getPostsFetch, getPostsSuccess, getPostsFailure } = postSlice.actions;
+export const { setPostList, getPostsFetch, getPostsSuccess, getPostsFailure, setFetching } =
+  postSlice.actions;
 
 export const selectPostList = (state: RootState) => state.posts;
+export const selectIsLoadingPosts = (state: RootState) => state.posts.isLoading;
 
 export default postSlice.reducer;

@@ -4,7 +4,6 @@ import { Form } from 'react-bootstrap';
 interface SearchProps {
   searchValue: string;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
-  // clearSearch: () => void;
 }
 
 export const Search: FC<SearchProps> = ({ searchValue, onChangeSearch }) => {

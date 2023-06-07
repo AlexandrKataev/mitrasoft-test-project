@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { getPostQueries } from 'shared/api/services';
 
 interface ISearchState {
   searchValue: string;
@@ -13,8 +14,8 @@ export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setSearchValue: (state, action: PayloadAction<string>) => {
-      state.searchValue = action.payload;
+    setSearchValue: (state, action: PayloadAction<getPostQueries>) => {
+      state.searchValue = action.payload.searchValue;
     },
   },
 });
