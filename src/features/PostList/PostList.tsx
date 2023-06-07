@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
 import { selectCurrentPage, selectTotalPages } from 'app/redux/slices/paginationSlice';
 import { getPostsFetch, selectIsLoadingPosts, selectPostList } from 'app/redux/slices/postSlice';
 import { selectSortBy } from 'app/redux/slices/sortSlice';
+import { PostLoader } from 'entities/Post/PostCard/ui/PostLoader';
 import { PostBody } from 'entities/index';
 import { Sort, Search, PaginationBlock } from 'features';
 
@@ -36,7 +37,9 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
         <Sort />
       </div>
 
-      {isLoading && <Spinner animation="border" />}
+      {/* {isLoading && <Spinner animation="border" />} */}
+
+      {isLoading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((post) => <PostLoader />)}
 
       {postsArray.posts.map((post) => (
         <PostBody
