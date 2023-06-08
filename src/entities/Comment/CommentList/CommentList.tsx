@@ -1,11 +1,7 @@
 import { FC, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import {
-  getCommentsFetch,
-  selectComments,
-  selectIsLoadingComments,
-} from 'app/redux/slices/commentSlice';
+import { getCommentsFetch, selectComments, selectIsLoadingComments } from 'app/redux/slices';
 
 import { CommentRow, CommentLoader } from 'entities/index';
 

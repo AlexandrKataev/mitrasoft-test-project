@@ -25,7 +25,7 @@ function* workFetchPosts(action: PayloadAction<getPostQueries>) {
     yield put(resetCurrentPage());
     yield put(setTotalPages(Math.ceil(posts.headers['x-total-count'] / 10)));
   } catch (e) {
-    console.log('ошибка апи');
+    alert('Ошибка сервера');
     yield put(getPostsFailure());
   }
 }
@@ -40,7 +40,7 @@ function* workPaginatePosts(action: PayloadAction<getPostQueries>) {
     yield delay(500);
     yield put(getPostsSuccess(posts.data));
   } catch (e) {
-    console.log('ошибка апи');
+    alert('Ошибка сервера');
     yield put(getPostsFailure());
   }
 }
@@ -58,7 +58,7 @@ function* workSearchPosts(action: PayloadAction<getPostQueries>) {
     yield put(resetCurrentPage());
     yield put(setTotalPages(Math.ceil(posts.headers['x-total-count'] / 10)));
   } catch (e) {
-    console.log('ошибка апи');
+    alert('Ошибка сервера');
     yield put(getPostsFailure());
   }
 }
@@ -73,7 +73,7 @@ function* workSortPosts(action: PayloadAction<getPostQueries>) {
     );
     yield put(getPostsSuccess(posts.data));
   } catch (e) {
-    console.log('ошибка апи');
+    alert('Ошибка сервера');
     yield put(getPostsFailure());
   }
 }

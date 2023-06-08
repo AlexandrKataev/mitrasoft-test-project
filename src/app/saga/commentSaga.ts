@@ -11,7 +11,7 @@ function* workFetchComments(action: PayloadAction<string>) {
     yield delay(1000);
     yield put(getCommentsSuccess(comments));
   } catch (e) {
-    console.log('ошибка апи комментариев');
+    alert('Ошибка сервера');
     yield put(getCommentsFailure());
   }
 }
