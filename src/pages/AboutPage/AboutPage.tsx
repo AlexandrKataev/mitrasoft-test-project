@@ -15,10 +15,7 @@ export const AboutPage = () => {
           <Col>
             <h3 className="p-1">Катаев Александр Дмитриевич</h3>
             <h5 className="p-1">Front-end разработчик</h5>
-            <div>
-              <span className="p-1 opacity-50">город:</span>
-              <span className="p-1">Казань</span>
-            </div>
+
             <div>
               <span className="p-1 opacity-50">тел:</span>
               <span className="p-1">8-965-621-12-32</span>
@@ -39,22 +36,27 @@ export const AboutPage = () => {
           <h4>Ключевые навыки</h4>
           <div className="mb-1">
             {['JavaScript', 'CSS/SASS', 'HTML', 'TypeScript'].map((el) => (
-              <MyBadge title={el} />
+              <MyBadge title={el} key={el} />
             ))}
           </div>
           <div className="mb-1">
             {['React', 'Redux', 'Redux Toolkit', 'RTK Query', 'React Query', 'Redux Saga'].map(
               (el) => (
-                <MyBadge title={el} />
+                <MyBadge title={el} key={el} />
               ),
             )}
           </div>
           <div className="mb-1">
-            {['Day.js', 'Axios', 'React Hook Form', 'React Router', 'Swagger Typescript Api'].map(
-              (el) => (
-                <MyBadge title={el} />
-              ),
-            )}
+            {[
+              'Day.js',
+              'Axios',
+              'Bootstrap',
+              'React Hook Form',
+              'React Router',
+              'Swagger Typescript Api',
+            ].map((el) => (
+              <MyBadge title={el} key={el} />
+            ))}
           </div>
           <div className="mb-1">
             {['Firebase', 'Docker (на уровне запустить проект)'].map((el) => (
@@ -63,17 +65,17 @@ export const AboutPage = () => {
           </div>
           <div className="mb-1">
             {['Git', 'GitHub', 'Vercel'].map((el) => (
-              <MyBadge title={el} />
+              <MyBadge title={el} key={el} />
             ))}
           </div>
           <div className="mb-1">
             {['Adobe Photoshop', 'Adobe Illustrator', 'Figma'].map((el) => (
-              <MyBadge title={el} />
+              <MyBadge title={el} key={el} />
             ))}
           </div>
           <div className="mb-1">
             {['Английский (на уровне чтения документации)'].map((el) => (
-              <MyBadge title={el} />
+              <MyBadge title={el} key={el} />
             ))}
           </div>
         </div>
@@ -86,26 +88,26 @@ export const AboutPage = () => {
           <ListGroup.Item className="p-3">
             <h5>Приложение для дыхательной гимнастики</h5>
             <div>
-              <a href="https://breath-react.vercel.app/home" target="_blank">
-                breath-react.vercel.app
+              <a href="https://github.com/AlexandrKataev/breath-react" target="_blank">
+                github.com/AlexandrKataev/breath-react
               </a>
             </div>
             <div>
               {['Redux Toolkit', 'Firebase Authentification', 'Firestore Database'].map((el) => (
-                <MyBadge title={el} />
+                <MyBadge title={el} key={el} />
               ))}
             </div>
           </ListGroup.Item>
           <ListGroup.Item className="p-3">
             <h5>ToDo со сроком выполнения, поиском и сортировкой</h5>
             <div>
-              <a href="https://todo-alexanderkataev.vercel.app/" target="_blank">
-                todo-alexanderkataev.vercel.app
+              <a href="https://github.com/AlexandrKataev/todo" target="_blank">
+                github.com/AlexandrKataev/todo
               </a>
             </div>
             <div>
               {['React Query'].map((el) => (
-                <MyBadge title={el} />
+                <MyBadge title={el} key={el} />
               ))}
             </div>
           </ListGroup.Item>
@@ -115,7 +117,7 @@ export const AboutPage = () => {
             <div>
               {['RTK Query', 'Docker Compose для запуска бэкенда', 'кодогенерация из Swagger'].map(
                 (el) => (
-                  <MyBadge title={el} />
+                  <MyBadge title={el} key={el} />
                 ),
               )}
             </div>
@@ -145,7 +147,7 @@ export const AboutPage = () => {
           игр с несложными скриптами. Хочу и готов развиваться как разработчик, изучать новые
           технологии и подходы. В состоянии самостоятельно находить решения, а так же предлагать
           свои мысли и идеи. Хобби: музыка, гитара, сноуборд. Без вредных привычек. Спасибо за
-          прочтение.
+          прочтение ;-)
         </p>
       </div>
     </div>
