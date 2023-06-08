@@ -1,7 +1,11 @@
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import { selectCurrentPage, selectTotalPages } from 'app/redux/slices/paginationSlice';
-import { selectSearchValue } from 'app/redux/slices/searchSlice';
-import { selectSortBy, setSortBy } from 'app/redux/slices/sortSlice';
+import {
+  selectCurrentPage,
+  selectSearchValue,
+  selectSortBy,
+  selectTotalPages,
+  setSortBy,
+} from 'app/redux/slices';
 
 import { Dropdown } from 'react-bootstrap';
 
@@ -21,7 +25,6 @@ export const Sort = () => {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            href="#/action-1"
             onClick={() =>
               dispatch(setSortBy({ currentPage, totalPages, searchValue, sortBy: '' }))
             }
@@ -29,7 +32,6 @@ export const Sort = () => {
             Нет
           </Dropdown.Item>
           <Dropdown.Item
-            href="#/action-2"
             onClick={() =>
               dispatch(setSortBy({ currentPage, totalPages, searchValue, sortBy: 'title' }))
             }

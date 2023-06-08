@@ -1,7 +1,11 @@
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import { selectCurrentPage, selectTotalPages } from 'app/redux/slices/paginationSlice';
-import { selectSearchValue, setSearchValue } from 'app/redux/slices/searchSlice';
-import { selectSortBy, setSortBy } from 'app/redux/slices/sortSlice';
+import {
+  selectCurrentPage,
+  selectTotalPages,
+  selectSearchValue,
+  selectSortBy,
+  setSortBy,
+} from 'app/redux/slices';
 
 export const useSort = () => {
   const dispatch = useAppDispatch();
@@ -10,9 +14,7 @@ export const useSort = () => {
   const currentPage = useAppSelector(selectCurrentPage);
   const totalPages = useAppSelector(selectTotalPages);
 
-  const onChangeSortBy = (
-    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-  ) => {
+  const onChangeSortBy = () => {
     dispatch(setSortBy({ currentPage, searchValue, sortBy, totalPages }));
   };
 

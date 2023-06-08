@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Form } from 'react-bootstrap';
 
 interface SearchProps {

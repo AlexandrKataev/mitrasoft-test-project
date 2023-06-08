@@ -1,19 +1,14 @@
-import { FC, useEffect, useState } from 'react';
-
-import { Image, Row, ToggleButton } from 'react-bootstrap';
-
-import { IPost, IComment } from 'shared/models';
-import { commentService } from 'shared/api/services';
-
-import { CommentRow } from 'entities/Comment/CommentRow';
-
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CommentList } from 'entities/Comment/CommentList/CommentList';
+
+import { Image, ToggleButton } from 'react-bootstrap';
+
+import { IPost } from 'shared/models';
+
+import { CommentList } from 'entities/index';
 
 export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
   const [commentsShow, setCommentsShow] = useState(false);
-
-  const [commentsArray, setCommentsArray] = useState([] as IComment[]);
 
   return (
     <div className="mb-3 p-4 rounded-3 bg-white border">
@@ -45,9 +40,7 @@ export const PostBody: FC<IPost> = ({ title, body, userId, id }) => {
         </div>
       </div>
 
-      {commentsShow && (
-        <CommentList commentsArray={commentsArray} setCommentsArray={setCommentsArray} id={id} />
-      )}
+      {commentsShow && <CommentList id={id} />}
     </div>
   );
 };

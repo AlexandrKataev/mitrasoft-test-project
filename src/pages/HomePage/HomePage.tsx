@@ -1,5 +1,4 @@
-import { PostList } from 'features';
-import React from 'react';
+import { PostList } from 'entities/index';
 
 export const HomePage = () => {
   return (

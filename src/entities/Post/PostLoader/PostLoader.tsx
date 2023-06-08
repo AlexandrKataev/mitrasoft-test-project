@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Image, Placeholder, Row, ToggleButton, Card, Col } from 'react-bootstrap';
+import { Placeholder, Row, Col } from 'react-bootstrap';
 import { ItemIcon } from 'shared/ui/icons/ImageLoader';
 
 export const PostLoader = () => {

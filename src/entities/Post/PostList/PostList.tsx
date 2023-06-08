@@ -1,15 +1,19 @@
+import { FC, useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import { selectCurrentPage, selectTotalPages } from 'app/redux/slices/paginationSlice';
-import { getPostsFetch, selectIsLoadingPosts, selectPostList } from 'app/redux/slices/postSlice';
-import { selectSortBy } from 'app/redux/slices/sortSlice';
-import { PostLoader } from 'entities/Post/PostCard/ui/PostLoader';
-import { PostBody } from 'entities/index';
+import {
+  selectCurrentPage,
+  selectTotalPages,
+  getPostsFetch,
+  selectIsLoadingPosts,
+  selectPostList,
+} from 'app/redux/slices';
+
+import { PostLoader, PostBody } from 'entities/index';
+
 import { Sort, Search, PaginationBlock } from 'features';
 
-import { FC, useEffect, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
-import { useSearch } from 'shared/hooks/useSearch';
-import { useSort } from 'shared/hooks/useSort';
+import { useSearch, useSort } from 'shared/hooks';
 
 interface PostListProps {
   userId: string | 'all';
@@ -24,7 +28,7 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
   const isLoading = useAppSelector(selectIsLoadingPosts);
 
   const { searchValue, onChangeSearchValue } = useSearch();
-  const { sortBy, onChangeSortBy } = useSort();
+  const { sortBy } = useSort();
 
   useEffect(() => {
     dispatch(getPostsFetch({ searchValue, sortBy, currentPage, totalPages }));
@@ -36,8 +40,6 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
         <Search searchValue={searchValue} onChangeSearch={onChangeSearchValue} />
         <Sort />
       </div>
-
-      {/* {isLoading && <Spinner animation="border" />} */}
 
       {isLoading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((post) => <PostLoader />)}
 

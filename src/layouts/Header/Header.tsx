@@ -1,9 +1,7 @@
-import { FC } from 'react';
-
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
-export const Header: FC = () => {
+export const Header = () => {
   return (
     <Navbar expand="lg">
       <Container>

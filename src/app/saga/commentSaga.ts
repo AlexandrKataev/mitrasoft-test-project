@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { getCommentsFailure, getCommentsSuccess } from 'app/redux/slices/commentSlice';
-import { AxiosResponse } from 'axios';
+
 import { call, delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { commentService } from 'shared/api/services';
 import { IComment } from 'shared/models';
