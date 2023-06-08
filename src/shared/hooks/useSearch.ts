@@ -1,23 +1,24 @@
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import {
-  selectTotalPages,
-  selectSearchValue,
-  setSearchValue,
-  selectSortBy,
-} from 'app/redux/slices';
+import { useAppDispatch } from 'app/redux/hooks';
+import { setSearchValue } from 'app/redux/slices';
+
+import { useGetPostsParams } from './useGetPostsParams';
 
 export const useSearch = () => {
-  const dispatch = useAppDispatch();
-  const searchValue = useAppSelector(selectSearchValue);
+  const { userId, searchValue, totalPages, sortBy } = useGetPostsParams();
 
-  const totalPages = useAppSelector(selectTotalPages);
-  const sortBy = useAppSelector(selectSortBy);
+  const dispatch = useAppDispatch();
 
   const onChangeSearchValue = (
     event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     dispatch(
-      setSearchValue({ searchValue: event.target.value, currentPage: 1, sortBy, totalPages }),
+      setSearchValue({
+        searchValue: event.target.value,
+        currentPage: 1,
+        sortBy,
+        totalPages,
+        userId,
+      }),
     );
   };
 

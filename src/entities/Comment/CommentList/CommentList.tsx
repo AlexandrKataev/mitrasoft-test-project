@@ -1,7 +1,11 @@
 import { FC, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import { getCommentsFetch, selectComments } from 'app/redux/slices/commentSlice';
+import {
+  getCommentsFetch,
+  selectComments,
+  selectIsLoadingComments,
+} from 'app/redux/slices/commentSlice';
 
 import { CommentRow, CommentLoader } from 'entities/index';
 
@@ -11,6 +15,8 @@ interface ICommentListProps {
 
 export const CommentList: FC<ICommentListProps> = ({ id }) => {
   const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(selectIsLoadingComments);
   const commentsArray = useAppSelector(selectComments).comments[`${id}`] || [];
 
   useEffect(() => {
@@ -19,7 +25,10 @@ export const CommentList: FC<ICommentListProps> = ({ id }) => {
 
   return (
     <div>
-      {commentsArray.length === 0 ? (
+      {commentsArray.length === 0 && !isLoading && (
+        <h4 className="text-center mt-5 text-black-50">Комментарии не найдены</h4>
+      )}
+      {isLoading ? (
         <CommentLoader />
       ) : (
         commentsArray.map((comment) => <CommentRow {...comment} key={comment.id} />)

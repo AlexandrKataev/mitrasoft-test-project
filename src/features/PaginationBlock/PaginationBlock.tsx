@@ -1,20 +1,14 @@
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import {
-  selectCurrentPage,
-  selectSearchValue,
-  selectSortBy,
-  selectTotalPages,
-  setCurrentPage,
-} from 'app/redux/slices';
+import { useAppDispatch } from 'app/redux/hooks';
+import { setCurrentPage } from 'app/redux/slices';
 import { useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 
+import { useGetPostsParams } from 'shared/hooks';
+
 export const PaginationBlock = () => {
+  const { currentPage, totalPages, searchValue, sortBy, userId } = useGetPostsParams();
+
   const dispatch = useAppDispatch();
-  const currentPage = useAppSelector(selectCurrentPage);
-  const totalPages = useAppSelector(selectTotalPages);
-  const searchValue = useAppSelector(selectSearchValue);
-  const sortBy = useAppSelector(selectSortBy);
 
   const [items, setItems] = useState([0]);
 
@@ -31,7 +25,9 @@ export const PaginationBlock = () => {
               key={el}
               active={el === +currentPage}
               onClick={() => {
-                dispatch(setCurrentPage({ currentPage: el, totalPages, searchValue, sortBy }));
+                dispatch(
+                  setCurrentPage({ currentPage: el, totalPages, searchValue, sortBy, userId }),
+                );
                 window.scrollTo(0, 0);
               }}>
               {el}

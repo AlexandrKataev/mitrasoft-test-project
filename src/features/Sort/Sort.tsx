@@ -1,39 +1,33 @@
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import {
-  selectCurrentPage,
-  selectSearchValue,
-  selectSortBy,
-  selectTotalPages,
-  setSortBy,
-} from 'app/redux/slices';
+import { useAppDispatch } from 'app/redux/hooks';
+import { setSortBy } from 'app/redux/slices';
 
 import { Dropdown } from 'react-bootstrap';
 
+import { useGetPostsParams } from 'shared/hooks';
+
 export const Sort = () => {
+  const { userId, sortBy, currentPage, totalPages, searchValue } = useGetPostsParams();
+
   const dispatch = useAppDispatch();
-  const sortBy = useAppSelector(selectSortBy);
-  const currentPage = useAppSelector(selectCurrentPage);
-  const totalPages = useAppSelector(selectTotalPages);
-  const searchValue = useAppSelector(selectSearchValue);
 
   return (
     <>
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
           Сортировка
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item
             onClick={() =>
-              dispatch(setSortBy({ currentPage, totalPages, searchValue, sortBy: '' }))
+              dispatch(setSortBy({ currentPage, totalPages, searchValue, userId, sortBy: '' }))
             }
             active={sortBy === ''}>
             Нет
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() =>
-              dispatch(setSortBy({ currentPage, totalPages, searchValue, sortBy: 'title' }))
+              dispatch(setSortBy({ currentPage, totalPages, searchValue, userId, sortBy: 'title' }))
             }
             active={sortBy === 'title'}>
             По алфавиту

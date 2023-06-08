@@ -1,37 +1,27 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import {
-  selectCurrentPage,
-  selectTotalPages,
-  getPostsFetch,
-  selectIsLoadingPosts,
-  selectPostList,
-} from 'app/redux/slices';
+import { getPostsFetch, selectIsLoadingPosts, selectPostList } from 'app/redux/slices';
 
 import { PostLoader, PostBody } from 'entities/index';
 
 import { Sort, Search, PaginationBlock } from 'features';
 
-import { useSearch, useSort } from 'shared/hooks';
+import { useGetPostsParams, useSearch, useSort } from 'shared/hooks';
 
-interface PostListProps {
-  userId: string | 'all';
-}
-
-export const PostList: FC<PostListProps> = ({ userId }) => {
+export const PostList = () => {
   const dispatch = useAppDispatch();
   const postsArray = useAppSelector(selectPostList);
-  const currentPage = useAppSelector(selectCurrentPage);
-  const totalPages = useAppSelector(selectTotalPages);
 
   const isLoading = useAppSelector(selectIsLoadingPosts);
+
+  const { currentPage, totalPages, userId } = useGetPostsParams();
 
   const { searchValue, onChangeSearchValue } = useSearch();
   const { sortBy } = useSort();
 
   useEffect(() => {
-    dispatch(getPostsFetch({ searchValue, sortBy, currentPage, totalPages }));
+    dispatch(getPostsFetch({ searchValue, sortBy, currentPage, totalPages, userId }));
   }, [dispatch]);
 
   return (
@@ -41,7 +31,11 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
         <Sort />
       </div>
 
-      {isLoading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((post) => <PostLoader />)}
+      {isLoading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((post) => <PostLoader key={post} />)}
+
+      {!isLoading && postsArray.posts.length === 0 && (
+        <h2 className="text-center mt-5 text-black-50">Посты не найдены</h2>
+      )}
 
       {postsArray.posts.map((post) => (
         <PostBody
@@ -52,6 +46,7 @@ export const PostList: FC<PostListProps> = ({ userId }) => {
           key={post.id}
         />
       ))}
+
       <div className="d-flex justify-content-center">
         <PaginationBlock />
       </div>

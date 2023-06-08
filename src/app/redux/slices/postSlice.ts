@@ -13,8 +13,8 @@ export const postSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    setPostList: (state, action: PayloadAction<IPost[]>) => {
-      state.posts = action.payload;
+    resetState: (state) => {
+      state.posts = [];
     },
     setFetching: (state) => {
       state.isLoading = true;
@@ -32,7 +32,7 @@ export const postSlice = createSlice({
   },
 });
 
-export const { setPostList, getPostsFetch, getPostsSuccess, getPostsFailure, setFetching } =
+export const { getPostsFetch, getPostsSuccess, getPostsFailure, setFetching, resetState } =
   postSlice.actions;
 
 export const selectPostList = (state: RootState) => state.posts;

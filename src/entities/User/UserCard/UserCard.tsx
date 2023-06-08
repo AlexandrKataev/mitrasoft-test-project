@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 
+import { Col, Container, Row, Image, Stack } from 'react-bootstrap';
+
+import { userService } from 'shared/api/services';
 import { IUser } from 'shared/models/IUser';
 
-import { Col, Container, Row, Image, Stack } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import { userService } from 'shared/api/services';
+import { getPostsFetch } from 'app/redux/slices';
+
+import { useAppDispatch } from 'app/redux/hooks';
+import { useGetPostsParams } from 'shared/hooks';
 
 export const UserCard = () => {
   const [userInfo, setUserInfo] = useState({
@@ -31,10 +35,13 @@ export const UserCard = () => {
     },
   } as IUser);
 
-  const userId = useParams() as { userId: string };
+  const { userId, currentPage, searchValue, sortBy, totalPages } = useGetPostsParams();
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    userService.getUser(userId.userId).then((data) => setUserInfo(data));
+    userService.getUser(userId).then((data) => setUserInfo(data));
+    dispatch(getPostsFetch({ searchValue, sortBy, currentPage, totalPages, userId }));
   }, [setUserInfo, userId]);
 
   return (

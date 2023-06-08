@@ -1,21 +1,15 @@
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks';
-import {
-  selectCurrentPage,
-  selectTotalPages,
-  selectSearchValue,
-  selectSortBy,
-  setSortBy,
-} from 'app/redux/slices';
+import { useAppDispatch } from 'app/redux/hooks';
+import { setSortBy } from 'app/redux/slices';
+
+import { useGetPostsParams } from './useGetPostsParams';
 
 export const useSort = () => {
+  const { userId, searchValue, totalPages, sortBy, currentPage } = useGetPostsParams();
+
   const dispatch = useAppDispatch();
-  const searchValue = useAppSelector(selectSearchValue);
-  const sortBy = useAppSelector(selectSortBy);
-  const currentPage = useAppSelector(selectCurrentPage);
-  const totalPages = useAppSelector(selectTotalPages);
 
   const onChangeSortBy = () => {
-    dispatch(setSortBy({ currentPage, searchValue, sortBy, totalPages }));
+    dispatch(setSortBy({ currentPage, searchValue, sortBy, totalPages, userId }));
   };
 
   return { sortBy, onChangeSortBy };

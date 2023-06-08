@@ -1,12 +1,12 @@
-@import '../../node_modules/bootstrap';
+@import 'bootstrap';
+
+a {
+  text-decoration: none;
+}
 
 body {
   padding: 0 calc(20px - (100vw - 100%)) 0 0;
   background: #efeff7;
-}
-
-a {
-  text-decoration: none;
 }
 
 @media (min-width: 1200px) {
