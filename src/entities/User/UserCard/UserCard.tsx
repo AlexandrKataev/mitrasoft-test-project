@@ -51,6 +51,7 @@ export const UserCard = () => {
           <Image
             src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/cf56a020234087.562e7e854f620.jpg"
             width="200px"
+            height="200px"
             roundedCircle
           />
         </Col>
