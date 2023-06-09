@@ -4,9 +4,11 @@ import { Routing } from './Routing';
 
 const App = () => {
   return (
-    <div className="container">
+    <div>
       <Header />
-      <Routing />
+      <div className="container">
+        <Routing />
+      </div>
     </div>
   );
 };

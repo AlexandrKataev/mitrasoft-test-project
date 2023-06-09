@@ -60,7 +60,7 @@ export const AboutPage = () => {
           </div>
           <div className="mb-1">
             {['Firebase', 'Docker (на уровне запустить проект)'].map((el) => (
-              <MyBadge title={el} />
+              <MyBadge title={el} key={el} />
             ))}
           </div>
           <div className="mb-1">
