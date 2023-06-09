@@ -8,10 +8,13 @@ a {
   text-decoration: none;
 }
 
+body {
+  background: #efeff7;
+}
+
 @media (min-width: 1200px) {
   body {
     padding: 0 calc(20px - (100vw - 100%)) 0 0;
-    background: #efeff7;
   }
 }
 
