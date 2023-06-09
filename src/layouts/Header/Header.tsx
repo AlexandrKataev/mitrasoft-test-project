@@ -1,32 +1,33 @@
-import { Navbar, Nav, Container, Image, Col } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Navbar, Nav, Container, Image, Col, Button } from 'react-bootstrap';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import myPhoto from 'shared/images/myPhoto.png';
 
 export const Header = () => {
+  const currentPage = useLocation();
+  const [isOpened, setIsOpened] = useState(false);
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" expanded={isOpened}>
       <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setIsOpened(!isOpened)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? 'text-dark px-3 py-2 me-2 text-opacity-50 btn-primary bg-white rounded'
-                  : 'text-dark px-3 py-2 me-2 rounded'
-              }>
-              Список постов
+            <NavLink to="/">
+              <Button
+                variant={currentPage.pathname === '/' ? 'primary' : 'outline-primary'}
+                className="me-2 mt-2"
+                onClick={() => setIsOpened(false)}>
+                Список постов
+              </Button>
             </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive
-                  ? 'text-dark px-3 py-2 mx-1 text-opacity-50 btn-primary bg-white rounded'
-                  : 'text-dark px-3 py-2 mx-1 rounded'
-              }>
-              Обо мне
+            <NavLink to="/about">
+              <Button
+                variant={currentPage.pathname === '/about' ? 'primary' : 'outline-primary'}
+                className="me-2 my-2"
+                onClick={() => setIsOpened(false)}>
+                Обо мне
+              </Button>
             </NavLink>
           </Nav>
         </Navbar.Collapse>
