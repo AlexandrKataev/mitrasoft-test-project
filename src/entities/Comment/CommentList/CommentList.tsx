@@ -24,7 +24,7 @@ export const CommentList: FC<ICommentListProps> = ({ id }) => {
       {commentsArray.length === 0 && !isLoading && (
         <h4 className="text-center mt-5 text-black-50">Комментарии не найдены</h4>
       )}
-      {isLoading ? (
+      {commentsArray.length === 0 && isLoading ? (
         <CommentLoader />
       ) : (
         commentsArray.map((comment) => <CommentRow {...comment} key={comment.id} />)
