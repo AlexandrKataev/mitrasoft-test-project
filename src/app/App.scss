@@ -12,11 +12,9 @@ body {
   padding: 0 calc(20px - (100vw - 100%)) 0 0;
   background: #efeff7;
 }
-.container {
-  max-width: 800px;
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 800px;
+  }
 }
-// @media (min-width: 1200px) {
-//   .container {
-//     max-width: 800px;
-//   }
-// }
