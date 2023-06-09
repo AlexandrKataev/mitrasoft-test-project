@@ -47,7 +47,7 @@ export const UserCard = () => {
   return (
     <Container className="bg-white p-4 border rounded-3 ">
       <Row xs={1} sm={1} md={2} className="d-flex justify-content-center ">
-        <Col className="col-md-4">
+        <Col className="col-md-4 d-flex justify-content-center">
           <Image
             src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/cf56a020234087.562e7e854f620.jpg"
             width="200px"
