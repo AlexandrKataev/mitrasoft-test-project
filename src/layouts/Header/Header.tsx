@@ -9,7 +9,7 @@ export const Header = () => {
   const [isOpened, setIsOpened] = useState(false);
   return (
     <div className="bg-white">
-      <Container fluid={true} className="container d-flex align-items-center">
+      <Container fluid={true} className="container d-flex align-items-center py-2">
         <Navbar expand="sm" expanded={isOpened} className=" ms-3">
           <Row fluid className="d-flex align-items-center">
             <Col>
