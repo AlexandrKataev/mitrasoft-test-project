@@ -8,7 +8,7 @@ import { IComment } from 'shared/models';
 function* workFetchComments(action: PayloadAction<string>) {
   try {
     const comments: IComment[] = yield call(commentService.getPostComments, action.payload);
-    yield delay(1000);
+    yield delay(500);
     yield put(getCommentsSuccess(comments));
   } catch (e) {
     alert('Ошибка сервера');
