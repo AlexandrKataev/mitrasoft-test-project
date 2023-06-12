@@ -24,7 +24,7 @@ export const Header = () => {
                       variant={currentPage.pathname === '/' ? 'primary' : 'outline-primary'}
                       className="me-2 mt-2"
                       onClick={() => setIsOpened(false)}>
-                      Список постов
+                      Посты
                     </Button>
                   </NavLink>
                   <NavLink to="/about">

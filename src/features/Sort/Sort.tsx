@@ -6,9 +6,8 @@ import { Dropdown } from 'react-bootstrap';
 import { useGetPostsParams } from 'shared/hooks';
 
 export const Sort = () => {
-  const { userId, sortBy, currentPage, totalPages, searchValue } = useGetPostsParams();
-
   const dispatch = useAppDispatch();
+  const { userId, sortBy, currentPage, totalPages, searchValue } = useGetPostsParams();
 
   return (
     <>
@@ -19,16 +18,18 @@ export const Sort = () => {
 
         <Dropdown.Menu>
           <Dropdown.Item
-            onClick={() =>
-              dispatch(setSortBy({ currentPage, totalPages, searchValue, userId, sortBy: '' }))
-            }
+            onClick={() => {
+              dispatch(setSortBy({ currentPage, totalPages, searchValue, userId, sortBy: '' }));
+            }}
             active={sortBy === ''}>
             Нет
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() =>
-              dispatch(setSortBy({ currentPage, totalPages, searchValue, userId, sortBy: 'title' }))
-            }
+            onClick={() => {
+              dispatch(
+                setSortBy({ currentPage, totalPages, searchValue, userId, sortBy: 'title' }),
+              );
+            }}
             active={sortBy === 'title'}>
             По алфавиту
           </Dropdown.Item>

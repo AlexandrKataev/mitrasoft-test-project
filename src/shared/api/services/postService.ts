@@ -13,9 +13,7 @@ export interface getPostQueries {
 export const postService = {
   getPostList: async ({ searchValue, sortBy, currentPage, userId }: getPostQueries) => {
     const response = await instance.get<IPost[]>(
-      `/posts?title_like=${searchValue}&_sort=${sortBy}&_order=asc&_page=${currentPage}${
-        userId === undefined ? '' : `&_userId=${userId}`
-      }`,
+      `/posts?title_like=${searchValue}&_sort=${sortBy}&_order=asc&_page=${currentPage}`,
     );
     return response;
   },

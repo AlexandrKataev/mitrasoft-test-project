@@ -5,6 +5,7 @@ import {
   selectSortBy,
   selectTotalPages,
 } from 'app/redux/slices';
+
 import { useParams } from 'react-router-dom';
 
 export const useGetPostsParams = () => {

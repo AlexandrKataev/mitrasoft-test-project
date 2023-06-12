@@ -7,7 +7,7 @@ import { PostLoader, PostBody } from 'entities/index';
 
 import { Sort, Search, PaginationBlock } from 'features';
 
-import { useGetPostsParams, useSearch, useSort } from 'shared/hooks';
+import { useGetPostsParams, useSearch } from 'shared/hooks';
 
 export const PostList = () => {
   const dispatch = useAppDispatch();
@@ -15,14 +15,13 @@ export const PostList = () => {
 
   const isLoading = useAppSelector(selectIsLoadingPosts);
 
-  const { currentPage, totalPages, userId } = useGetPostsParams();
+  const { searchValue, currentPage, totalPages, userId, sortBy } = useGetPostsParams();
 
-  const { searchValue, onChangeSearchValue } = useSearch();
-  const { sortBy } = useSort();
+  const { onChangeSearchValue } = useSearch();
 
   useEffect(() => {
     dispatch(getPostsFetch({ searchValue, sortBy, currentPage, totalPages, userId }));
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
