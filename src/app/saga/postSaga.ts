@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { call, delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { getPostQueries, postService } from 'shared/api/services';
 import {
@@ -80,9 +80,9 @@ function* workSortPosts(action: PayloadAction<getPostQueries>) {
 
 function* postsWathcer() {
   yield takeLatest('posts/getPostsFetch', workFetchPosts);
-  yield takeLatest('pagination/setCurrentPage', workPaginatePosts);
-  yield takeLatest('search/setSearchValue', workSearchPosts);
-  yield takeLatest('sort/setSortBy', workSortPosts);
+  yield takeLatest('posts/setCurrentPage', workPaginatePosts);
+  yield takeLatest('posts/setSearchValue', workSearchPosts);
+  yield takeLatest('posts/setSortBy', workSortPosts);
 }
 
 export default postsWathcer;

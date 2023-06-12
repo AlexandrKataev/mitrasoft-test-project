@@ -33,11 +33,11 @@ export const PostList = () => {
 
       {isLoading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((post) => <PostLoader key={post} />)}
 
-      {!isLoading && postsArray.posts.length === 0 && (
+      {!isLoading && postsArray.length === 0 && (
         <h2 className="text-center mt-5 text-black-50">Посты не найдены</h2>
       )}
 
-      {postsArray.posts.map((post) => (
+      {postsArray.map((post) => (
         <PostBody
           title={post.title}
           body={post.body}
