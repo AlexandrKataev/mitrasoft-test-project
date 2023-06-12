@@ -7,7 +7,7 @@ import { IComment } from 'shared/models';
 export const CommentRow: FC<IComment> = ({ email, body }) => {
   return (
     <>
-      <div className="m-3 p-3 border rounded-3">
+      <div className="my-3 p-3 border rounded-3">
         <div className="d-flex">
           <Image
             width="30px"
