@@ -30,6 +30,10 @@ export const PostList = () => {
         <Sort />
       </div>
 
+      <div className="d-flex justify-content-center">
+        <PaginationBlock />
+      </div>
+
       {isLoading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((post) => <PostLoader key={post} />)}
 
       {!isLoading && postsArray.length === 0 && (
@@ -46,7 +50,7 @@ export const PostList = () => {
         />
       ))}
 
-      <div className="d-flex justify-content-center">
+      <div className=" pb-5 d-flex justify-content-center">
         <PaginationBlock />
       </div>
     </div>
