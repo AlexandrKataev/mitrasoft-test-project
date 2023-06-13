@@ -14,15 +14,12 @@ export const PaginationBlock = () => {
 
   const paginationPages = () => {
     const arr = Array.from({ length: totalPages }, (_, i) => i + 1);
-    if (totalPages < 10) {
+    if (totalPages < 6) {
       return arr;
-    } else if (totalPages >= 10 && currentPage < 10) {
-      return arr.slice(0, 9);
-    } else if (totalPages >= 10 && currentPage >= 10) {
-      return arr.slice(
-        Math.floor(currentPage / 10) * 10 - 1,
-        Math.floor(currentPage / 10) * 10 + 9,
-      );
+    } else if (totalPages >= 6 && currentPage < 6) {
+      return arr.slice(0, 5);
+    } else if (totalPages >= 6 && currentPage >= 6) {
+      return arr.slice(Math.floor(currentPage / 6) * 6 - 1, Math.floor(currentPage / 6) * 6 + 5);
     }
   };
 
@@ -32,15 +29,17 @@ export const PaginationBlock = () => {
 
   return (
     <div>
-      {totalPages > 0 && (
+      {totalPages > 1 && (
         <Pagination>
           <Pagination.First
             onClick={() => {
               dispatch(setCurrentPage({ currentPage: 1, totalPages, searchValue, sortBy, userId }));
               window.scrollTo(0, 0);
             }}
+            disabled={currentPage === 1}
           />
           <Pagination.Prev
+            disabled={currentPage === 1}
             onClick={() => {
               currentPage - 1 > 0 &&
                 dispatch(
@@ -73,6 +72,7 @@ export const PaginationBlock = () => {
           })}
 
           <Pagination.Next
+            disabled={currentPage === totalPages}
             onClick={() => {
               currentPage + 1 <= totalPages &&
                 dispatch(
@@ -88,6 +88,7 @@ export const PaginationBlock = () => {
             }}
           />
           <Pagination.Last
+            disabled={currentPage === totalPages}
             onClick={() => {
               dispatch(
                 setCurrentPage({
